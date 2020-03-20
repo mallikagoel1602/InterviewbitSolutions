@@ -1,0 +1,33 @@
+vector<int> Solution::flip(string A) {
+    vector<int> ZeroOrOne(A.size());
+    vector<int> ans;
+    for(int i=0; i<A.size(); i++){
+        if(A[i]=='1')
+            ZeroOrOne[i]=-1;
+        else if(A[i]=='0')
+            ZeroOrOne[i]=1;
+        
+    }
+    int cumulative=0, l=0, r=0, lAns=0, rAns=0, maxSum=INT_MIN;
+    for(int i=0; i<A.size(); i++){
+        cumulative+=ZeroOrOne[i];
+        if(cumulative<0){
+            l=i+1;
+            cumulative=0;
+        }
+        else if(cumulative>maxSum){
+            lAns=l;
+            rAns=i;
+            maxSum=cumulative;
+        }
+    }
+    if(maxSum<=0){
+        return ans;
+    }
+    else{
+        ans.push_back(lAns+1);
+        ans.push_back(rAns+1);
+    }
+    return ans;
+    
+}

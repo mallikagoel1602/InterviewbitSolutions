@@ -1,0 +1,50 @@
+ListNode* reverse(ListNode* head){
+     ListNode* prev=NULL;
+     ListNode* curr=head;
+     ListNode* next;
+     while(curr){
+         next=curr->next;
+         curr->next=prev;
+         prev=curr;
+         curr=next;
+     }
+     head=prev;
+     return head;
+ }
+ ListNode* Solution::reorderList(ListNode* A) {
+    
+    if(!A || !A->next){
+        return A;
+    }
+    
+    ListNode* slw=A;
+    ListNode* fst=A;
+    
+    while(fst->next && fst->next->next){
+        slw=slw->next;
+        fst=fst->next->next;
+    }
+    
+    ListNode* temp=slw->next;
+    slw->next=NULL;
+    ListNode* head1=A;
+    
+    ListNode* head2=reverse(temp);
+    ListNode* head=new ListNode(0);
+    ListNode* curr=head;
+    
+    while(head1 || head2){
+        if(head1){
+            curr->next=head1;
+            head1=head1->next;
+            curr=curr->next;
+        }
+        if(head2){
+            curr->next=head2;
+            head2=head2->next;
+            curr=curr->next;
+        }
+    }
+    head = head->next; 
+    return head;
+}

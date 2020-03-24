@@ -1,0 +1,30 @@
+vector<vector<int> > Solution::diagonal(vector<vector<int> > &A) {
+    int m=A.size();
+    int n=A[0].size();
+    int i, j;
+    int c=0;
+    vector<vector<int>> res(m+n-1);
+    for(int k=0; k<=n-1; k++){
+        
+        i=0;
+        j=k;
+        while(j>=0){
+            res[c].push_back(A[i][j]);
+            i=i+1;
+            j=j-1;
+        }
+        c++;
+        
+    }
+    for(int k=1; k<m; k++){
+        i=k;
+        j=n-1;
+        while(i<=m-1){
+            res[c].push_back(A[i][j]);
+            i=i+1;
+            j=j-1;
+        }
+        c++;
+    }
+    return res;
+}

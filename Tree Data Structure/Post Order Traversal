@@ -1,0 +1,25 @@
+vector<int> Solution::postorderTraversal(TreeNode* A) {
+    stack<TreeNode*> s1;
+    stack<TreeNode*> s2;
+    vector<int> res;
+    TreeNode* pCurr=A;
+    s1.push(pCurr);
+    while(!s1.empty()){
+        TreeNode* node=s1.top();
+        s1.pop();
+        s2.push(node->val);
+        if(node->left)
+            s1.push(node->left);
+        if(node->right)
+            s1.push(node->right);
+    }
+    
+    TreeNode* node1;  
+    while(!s2.empty()){
+        node1=s2.top();
+        res.emplace_back(node1);
+        s2.pop();
+        
+    }
+    return res;
+}
